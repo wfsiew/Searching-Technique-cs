@@ -23,14 +23,14 @@ public class Utils
 
     /// <summary>
     /// The depth limit that will be used in Depth First Search to search up to
-	/// a certain level.
+    /// a certain level.
     /// It will be overwritten by the depth_limit specified in the config.xml file
     /// </summary>
     public static int depthlimit = 41;
 
     /// <summary>
     /// The goal state map array. It maps each digit in the goal state to row
-	/// and column.
+    /// and column.
     /// Used for heuristic value calculation.
     /// </summary>
     private static byte[,] goalstatemap = new byte[9, 2];
@@ -38,21 +38,21 @@ public class Utils
     /// <summary>
     /// The file name for Breadth First Search output.
     /// The output is the path of the initial state to goal state (in reverse,
-	/// goal state first).
+    /// goal state first).
     /// </summary>
     public const string BreadthFirstFile = "breadth_first.txt";
 
     /// <summary>
     /// The file name for Depth First Search output.
     /// The output is the path of the initial state to goal state (in reverse,
-	/// goal state first).
+    /// goal state first).
     /// </summary>
     public const string DepthFirstFile = "depth_first.txt";
 
     /// <summary>
     /// The file name for Best First Search output.
     /// The output is the path of the initial state to goal state (in reverse,
-	/// goal state first).
+    /// goal state first).
     /// </summary>
     public const string BestFirstFile = "best_first.txt";
 
@@ -66,7 +66,7 @@ public class Utils
     /// </summary>
     public enum Direction
     {
-		Up, Down, Left, Right
+        Up, Down, Left, Right
     }
 
     /// <summary>
@@ -191,51 +191,51 @@ public class Utils
                 return states;
 
             case 3:
-	            states = new int[3];
-	            states[0] = MoveBlank(state, blankindex, Direction.Up);
-	            states[1] = MoveBlank(state, blankindex, Direction.Down);
-	            states[2] = MoveBlank(state, blankindex, Direction.Right);
-	            return states;
+                states = new int[3];
+                states[0] = MoveBlank(state, blankindex, Direction.Up);
+                states[1] = MoveBlank(state, blankindex, Direction.Down);
+                states[2] = MoveBlank(state, blankindex, Direction.Right);
+                return states;
 
             case 4:
-	            states = new int[4];
-	            states[0] = MoveBlank(state, blankindex, Direction.Up);
-	            states[1] = MoveBlank(state, blankindex, Direction.Left);
-	            states[2] = MoveBlank(state, blankindex, Direction.Right);
-	            states[3] = MoveBlank(state, blankindex, Direction.Down);
-	            return states;
+                states = new int[4];
+                states[0] = MoveBlank(state, blankindex, Direction.Up);
+                states[1] = MoveBlank(state, blankindex, Direction.Left);
+                states[2] = MoveBlank(state, blankindex, Direction.Right);
+                states[3] = MoveBlank(state, blankindex, Direction.Down);
+                return states;
 
             case 5:
-	            states = new int[3];
-	            states[0] = MoveBlank(state, blankindex, Direction.Up);
-	            states[1] = MoveBlank(state, blankindex, Direction.Down);
-	            states[2] = MoveBlank(state, blankindex, Direction.Left);
-	            return states;
+                states = new int[3];
+                states[0] = MoveBlank(state, blankindex, Direction.Up);
+                states[1] = MoveBlank(state, blankindex, Direction.Down);
+                states[2] = MoveBlank(state, blankindex, Direction.Left);
+                return states;
 
             case 6:
-	            states = new int[2];
-	            states[0] = MoveBlank(state, blankindex, Direction.Up);
-	            states[1] = MoveBlank(state, blankindex, Direction.Right);
-	            return states;
+                states = new int[2];
+                states[0] = MoveBlank(state, blankindex, Direction.Up);
+                states[1] = MoveBlank(state, blankindex, Direction.Right);
+                return states;
 
             case 7:
-	            states = new int[3];
-	            states[0] = MoveBlank(state, blankindex, Direction.Up);
-	            states[1] = MoveBlank(state, blankindex, Direction.Left);
-	            states[2] = MoveBlank(state, blankindex, Direction.Right);
-	            return states;
+                states = new int[3];
+                states[0] = MoveBlank(state, blankindex, Direction.Up);
+                states[1] = MoveBlank(state, blankindex, Direction.Left);
+                states[2] = MoveBlank(state, blankindex, Direction.Right);
+                return states;
 
             case 8:
-	            states = new int[2];
-	            states[0] = MoveBlank(state, blankindex, Direction.Up);
-	            states[1] = MoveBlank(state, blankindex, Direction.Left);
-	            return states;
+                states = new int[2];
+                states[0] = MoveBlank(state, blankindex, Direction.Up);
+                states[1] = MoveBlank(state, blankindex, Direction.Left);
+                return states;
 
             default:
-	            states = new int[2];
-	            states[0] = MoveBlank(state, blankindex, Direction.Right);
-	            states[1] = MoveBlank(state, blankindex, Direction.Down);
-	            return states;
+                states = new int[2];
+                states[0] = MoveBlank(state, blankindex, Direction.Right);
+                states[1] = MoveBlank(state, blankindex, Direction.Down);
+                return states;
         }
     }
 
@@ -251,18 +251,18 @@ public class Utils
 
         for (byte i = 0; i < 9; i++)
         {
-	        int digit = GetDigitAtIndex(state, i);
-	        if (digit == 0)
-		        continue;
+            int digit = GetDigitAtIndex(state, i);
+            if (digit == 0)
+                continue;
 
-	        int row1 = i / 3;
-	        int column1 = i % 3;
-	        int row2 = goalstatemap[digit, 0];
-	        int column2 = goalstatemap[digit, 1];
+            int row1 = i / 3;
+            int column1 = i % 3;
+            int row2 = goalstatemap[digit, 0];
+            int column2 = goalstatemap[digit, 1];
 
-	        int rowoffset = Math.Abs(row1 - row2);
-	        int columnoffset = Math.Abs(column1 - column2);
-	        hval += rowoffset + columnoffset;
+            int rowoffset = Math.Abs(row1 - row2);
+            int columnoffset = Math.Abs(column1 - column2);
+            hval += rowoffset + columnoffset;
         }
 
         return hval;
@@ -284,9 +284,9 @@ public class Utils
 
         for (byte i = 0; i < c.Length; i++)
         {
-	        int x = GetDigitAtIndex(state, i);
-	        char tmp = (x == 0 ? ' ' : char.Parse(x.ToString()));
-	        c[i] = tmp;
+            int x = GetDigitAtIndex(state, i);
+            char tmp = (x == 0 ? ' ' : char.Parse(x.ToString()));
+            c[i] = tmp;
         }
 
         sb.AppendFormat("{0}{1}{2}" + Environment.NewLine, c[0], c[1], c[2]);
@@ -317,34 +317,34 @@ public class Utils
 
     /// <summary>
     /// Initializes the 8 puzzle with initial state, goal state, and
-	/// depth limit from config.xml file.
+    /// depth limit from config.xml file.
     /// </summary>
     public static void SetPuzzle()
     {
         try
         {
-	        string dir = Directory.GetCurrentDirectory();
-	        string file = Path.Combine(dir, "config.xml");
-	        if (!File.Exists(file))
-		        return;
+            string dir = Directory.GetCurrentDirectory();
+            string file = Path.Combine(dir, "config.xml");
+            if (!File.Exists(file))
+                return;
 
-	        XmlDocument doc = new XmlDocument();
-	        doc.Load(file);
-	        XmlNode initnode = doc.SelectSingleNode("/config/init_state");
-	        XmlNode goalnode = doc.SelectSingleNode("/config/goal_state");
-	        XmlNode depthnode = doc.SelectSingleNode("/config/depth_limit");
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+            XmlNode initnode = doc.SelectSingleNode("/config/init_state");
+            XmlNode goalnode = doc.SelectSingleNode("/config/goal_state");
+            XmlNode depthnode = doc.SelectSingleNode("/config/depth_limit");
 
-	        string init = ReverseString(initnode.InnerText);
-	        string goal = ReverseString(goalnode.InnerText);
-	        string depth = depthnode.InnerText;
+            string init = ReverseString(initnode.InnerText);
+            string goal = ReverseString(goalnode.InnerText);
+            string depth = depthnode.InnerText;
 
-	        int _initstate = int.Parse(init);
-	        int _goalstate = int.Parse(goal);
-	        int _depthlimit = int.Parse(depth);
+            int _initstate = int.Parse(init);
+            int _goalstate = int.Parse(goal);
+            int _depthlimit = int.Parse(depth);
 
-	        initstate = _initstate;
-	        goalstate = _goalstate;
-	        depthlimit = _depthlimit;
+            initstate = _initstate;
+            goalstate = _goalstate;
+            depthlimit = _depthlimit;
         }
 
         catch
@@ -362,9 +362,9 @@ public class Utils
     {
         for (byte i = 0; i < 9; i++)
         {
-	        int digit = GetDigitAtIndex(goalstate, i);
-	        goalstatemap[digit, 0] = (byte)(i / 3);
-	        goalstatemap[digit, 1] = (byte)(i % 3);
+            int digit = GetDigitAtIndex(goalstate, i);
+            goalstatemap[digit, 0] = (byte)(i / 3);
+            goalstatemap[digit, 1] = (byte)(i % 3);
         }
     }
 
