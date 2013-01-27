@@ -162,7 +162,7 @@ public class Utils
 
             default:
                 return SwapDigit(state, blankindex, blankindex + 1);
-		}
+        }
     }
 
     /// <summary>
