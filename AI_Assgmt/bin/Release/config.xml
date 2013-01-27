@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+	<!--
+	1. init_state
+		the initial state of the 8 puzzle, from first digit at first row, first column
+		(use 0 to represent blank)
+		Example:
+
+		Consider the puzzle
+
+		3 4 7
+		6 1 8
+		  5 2
+
+		the init_state will be 347618052
+		(same goes to goal_state)
+
+	2. goal_state
+		the goal state of the 8 puzzle, from first digit at first row, first column
+		(use 0 to represent blank)
+
+	3. depth_limit
+		the depth limit used by Depth First Search
+		(0 means no depth limit)
+
+	Examples of working initial state => goal state :
+
+	1. 347618052 => 123804567 (with depth limit 20)
+	2. 123045678 => 012345678 (with depth limit 45)
+	3. 283164705 => 123804765 (with depth limit 5)
+	4. 162573048 => 123456780 (with depth limit 25)
+	5. 813402765 => 123456780 (with depth limit 32)
+	-->
+	<init_state>347618052</init_state>
+	<goal_state>123804567</goal_state>
+	<depth_limit>20</depth_limit>
+</config>

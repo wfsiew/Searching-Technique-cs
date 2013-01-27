@@ -1,0 +1,335 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AI_Assgmt</name>
+    </assembly>
+    <members>
+        <member name="T:BasePriorityQueue`1">
+            <summary>
+            Base class of priority queue, where an element in the queue is QueueItem object.
+            </summary>
+        </member>
+        <member name="F:BasePriorityQueue`1.items">
+            <summary>
+            A list of QueueItem.
+            </summary>
+        </member>
+        <member name="F:BasePriorityQueue`1.allowrepeat">
+            <summary>
+            A flag to determine whether the queue allows repetition of the same item.
+            </summary>
+        </member>
+        <member name="M:BasePriorityQueue`1.Enqueue(System.Int32,`0)">
+            <summary>
+            Adds an object to the queue, and place the object in the queue
+            based on the key.
+            Object with key will be at the left end in the queue.
+            </summary>
+        </member>
+        <member name="M:BasePriorityQueue`1.Dequeue">
+            <summary>
+            Removes the left most object from the queue.
+            </summary>
+            <returns>The left most object in the queue.</returns>
+        </member>
+        <member name="M:BasePriorityQueue`1.IsRepetitionExist(System.Int32,`0)">
+            <summary>
+            Checks whether there is repetition of the key in the queue.
+            </summary>
+            <returns>True if there is repetition of the key, False otherwise.</returns>
+        </member>
+        <member name="M:BasePriorityQueue`1.Replace(System.Collections.Generic.LinkedListNode{QueueItem{`0}},QueueItem{`0})">
+            <summary>
+            Replaces an existing object in the queue with a new object.
+            </summary>
+        </member>
+        <member name="P:BasePriorityQueue`1.Count">
+            <summary>
+            Gets the number of objects actually contained in the queue.
+            </summary>
+        </member>
+        <member name="P:BasePriorityQueue`1.AllowRepeat">
+            <summary>
+            Gets/Sets the allow repeat mode of the queue.
+            </summary>
+        </member>
+        <member name="P:BasePriorityQueue`1.List">
+            <summary>
+            Gets the actual queue.
+            </summary>
+        </member>
+        <member name="T:BaseSolver">
+            <summary>
+            Base class.
+            </summary>
+        </member>
+        <member name="F:BaseSolver.initstate">
+            <summary>
+            The initial state of the 8 puzzle.
+            </summary>
+        </member>
+        <member name="F:BaseSolver.watch">
+            <summary>
+            Used to capture the time taken for the Solve method to find the goal state.
+            </summary>
+        </member>
+        <member name="T:BestFirst">
+            <summary>
+            Best First Search class.
+            Uses PriorityQueue as open list, and Dictionary as close list.
+            </summary>
+        </member>
+        <member name="T:BreadthFirst">
+            <summary>
+            Breadth First Search class.
+            Uses Queue as open list, and Dictionary as close list.
+            </summary>
+        </member>
+        <member name="T:DepthFirst">
+            <summary>
+            Depth First Search class.
+            Uses Stack as open list, and Dictionary as close list.
+            </summary>
+        </member>
+        <member name="T:PriorityQueue">
+            <summary>
+            PriorityQueue class.
+            </summary>
+        </member>
+        <member name="M:PriorityQueue.IsRepetitionExist(System.Int32,State)">
+            <summary>
+            Overrides the method from BasePriority class.
+            It checks whether the same state exist in the queue.
+            If yes, it compares the state's level found from the queue with the specified state's level.
+            If the state from the queue is deeper, it will be replaced with the specified state.
+            </summary>
+            <returns>True if there is repetition of the state, False otherwise.</returns>
+        </member>
+        <member name="T:QueueItem`1">
+            <summary>
+            Generic class of queue item, consist of key (int) and a generic object (T).
+            Used in BasePriorityQueue class.
+            </summary>
+        </member>
+        <member name="T:State">
+            <summary>
+            A class which encapsulates a state in the 8 puzzle.
+            </summary>
+        </member>
+        <member name="F:State.state">
+            <summary>
+            The state value, represented in reversed order from the 9 slots in the 8 puzzle.
+            </summary>
+        </member>
+        <member name="F:State.heuristicvalue">
+            <summary>
+            The heuristic value of this state.
+            </summary>
+        </member>
+        <member name="F:State.level">
+            <summary>
+            The depth level of this state. The initial state will have level 0.
+            </summary>
+        </member>
+        <member name="F:State.evalue">
+            <summary>
+            The evaluation value of this state.
+            EValue = depth level + heuristic value
+            </summary>
+        </member>
+        <member name="F:State.parent">
+            <summary>
+            A reference of the parent state.
+            </summary>
+        </member>
+        <member name="M:State.Equals(State)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <returns>True if the state of this object is equal to another object's state, False otherwise.</returns>
+        </member>
+        <member name="P:State.StateValue">
+            <summary>
+            Gets the state value.
+            </summary>
+        </member>
+        <member name="P:State.HeuristicValue">
+            <summary>
+            Gets/Sets the heuristic value.
+            </summary>
+        </member>
+        <member name="P:State.Level">
+            <summary>
+            Gets the depth level.
+            </summary>
+        </member>
+        <member name="P:State.EValue">
+            <summary>
+            Gets the evaluation value.
+            </summary>
+        </member>
+        <member name="P:State.Parent">
+            <summary>
+            Gets/Sets the reference of the parent state.
+            </summary>
+        </member>
+        <member name="T:Utils">
+            <summary>
+            Helper class which provides all the necessary static methods used in the entire application.
+            </summary>
+        </member>
+        <member name="F:Utils.BreadthFirstFile">
+            <summary>
+            The file name for Breadth First Search output.
+            The output is the path of the initial state to goal state (in reverse,
+            goal state first).
+            </summary>
+        </member>
+        <member name="F:Utils.DepthFirstFile">
+            <summary>
+            The file name for Depth First Search output.
+            The output is the path of the initial state to goal state (in reverse,
+            goal state first).
+            </summary>
+        </member>
+        <member name="F:Utils.BestFirstFile">
+            <summary>
+            The file name for Best First Search output.
+            The output is the path of the initial state to goal state (in reverse,
+            goal state first).
+            </summary>
+        </member>
+        <member name="F:Utils.GoalStateNotFound">
+            <summary>
+            The message to be displayed if the goal state not found.
+            </summary>
+        </member>
+        <member name="F:Utils.initstate">
+            <summary>
+            The initial state of the puzzle.
+            It will be overwritten by the init_state specified in the config.xml file.
+            </summary>
+        </member>
+        <member name="F:Utils.goalstate">
+            <summary>
+            The goal state of the puzzle that the program will try to find.
+            It will be overwritten by the goal_state specified in the config.xml file.
+            </summary>
+        </member>
+        <member name="F:Utils.depthlimit">
+            <summary>
+            The depth limit that will be used in Depth First Search to search up to
+            a certain level.
+            It will be overwritten by the depth_limit specified in the config.xml file
+            </summary>
+        </member>
+        <member name="F:Utils.goalstatemap">
+            <summary>
+            The goal state map array. It maps each digit in the goal state to row
+            and column.
+            Used for heuristic value calculation.
+            </summary>
+        </member>
+        <member name="M:Utils.IsGoalState(System.Int32)">
+            <summary>
+            Checks whether the given state is the goal state.
+            </summary>
+            <returns>True if the state is goal state, False otherwise.</returns>
+        </member>
+        <member name="M:Utils.GetBlankIndex(System.Int32)">
+            <summary>
+            Gets the index of digit 0 from a given state.
+            </summary>
+            <returns>The index of digit 0.</returns>
+        </member>
+        <member name="M:Utils.GetIndexOfDigit(System.Int32,System.Int32)">
+            <summary>
+            Gets the index of a specified digit from a given state.
+            </summary>
+            <returns>The index of specified digit.</returns>
+        </member>
+        <member name="M:Utils.GetDigitAtIndex(System.Int32,System.Int32)">
+            <summary>
+            Gets a digit from a specified index from a given state.
+            </summary>
+            <returns>The digit from a specified index.</returns>
+        </member>
+        <member name="M:Utils.SetDigitAtIndex(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets a digit at the specified index.
+            </summary>
+            <returns>A new state with the digit sets at the specified index.</returns>
+        </member>
+        <member name="M:Utils.SwapDigit(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Swaps 2 digits and returns a new state.
+            </summary>
+            <returns>A new state with 2 digits being exchanged.</returns>
+        </member>
+        <member name="M:Utils.MoveBlank(System.Int32,System.Int32,Utils.Direction)">
+            <summary>
+            Moves the blank with the specified direction.
+            </summary>
+            <returns>A new state with a new blank position.</returns>
+        </member>
+        <member name="M:Utils.ResolveNextStates(System.Int32)">
+            <summary>
+            Resolves the possible next states from a given state
+            which determines by the current blank index.
+            </summary>
+            <returns>An array of possible next states.</returns>
+        </member>
+        <member name="M:Utils.GetHeuristicValue(System.Int32)">
+            <summary>
+            Gets the heuristic value from a given state.
+            It calculates the row offset and column offset from the goal state.
+            The distance is row offset + column offset.
+            </summary>
+            <returns>The heuristic value from a given state.</returns>
+        </member>
+        <member name="M:Utils.GetStateString(System.Int32)">
+             <summary>
+             Gets a string representation from a given state.
+             e.g A state with 250816743 will be represented in
+            
+             347
+             618
+              52
+             </summary>
+             <returns>The string representation from a given state.</returns>
+        </member>
+        <member name="M:Utils.ShowPuzzle">
+            <summary>
+            Displays the 8 puzzle in the console.
+            </summary>
+        </member>
+        <member name="M:Utils.ShowNoSolutionMessage">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:Utils.SetPuzzle">
+            <summary>
+            Initializes the 8 puzzle with initial state, goal state, and
+            depth limit from config.xml file.
+            </summary>
+        </member>
+        <member name="M:Utils.SetGoalStateMap">
+            <summary>
+            Initializes the goalstatemap array.
+            It keeps the row and column for each digit in the goal state.
+            </summary>
+        </member>
+        <member name="M:Utils.ReverseString(System.String)">
+            <summary>
+            Reverses a string.
+            </summary>
+            <returns>A new string with the original string being reversed.</returns>
+        </member>
+        <member name="T:Utils.Direction">
+            <summary>
+            The movement constants.
+            </summary>
+        </member>
+    </members>
+</doc>
