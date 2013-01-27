@@ -5,3 +5,7 @@ F:\vs_Projects\AI_Assgmt\AI_Assgmt\bin\Release\AI_Assgmt.pdb
 F:\vs_Projects\AI_Assgmt\AI_Assgmt\obj\Release\AI_Assgmt.csprojResolveAssemblyReference.cache
 F:\vs_Projects\AI_Assgmt\AI_Assgmt\obj\Release\AI_Assgmt.exe
 F:\vs_Projects\AI_Assgmt\AI_Assgmt\obj\Release\AI_Assgmt.pdb
+F:\Assigments\AI Assignment\AI_Assgmt_cs\AI_Assgmt\bin\Release\AI_Assgmt.exe.config
+F:\Assigments\AI Assignment\AI_Assgmt_cs\AI_Assgmt\bin\Release\AI_Assgmt.XML
+F:\Assigments\AI Assignment\AI_Assgmt_cs\AI_Assgmt\obj\Release\AI_Assgmt.exe
+F:\Assigments\AI Assignment\AI_Assgmt_cs\AI_Assgmt\obj\Release\AI_Assgmt.pdb

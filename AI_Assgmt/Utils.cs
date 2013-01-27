@@ -75,7 +75,7 @@ public class Utils
     /// <returns>True if the state is goal state, False otherwise.</returns>
     public static bool IsGoalState(int state)
     {
-		return state == goalstate;
+        return state == goalstate;
     }
 
     /// <summary>
@@ -84,7 +84,7 @@ public class Utils
     /// <returns>The index of digit 0.</returns>
     public static byte GetBlankIndex(int state)
     {
-		return GetIndexOfDigit(state, 0);
+        return GetIndexOfDigit(state, 0);
     }
 
     /// <summary>
@@ -93,13 +93,13 @@ public class Utils
     /// <returns>The index of specified digit.</returns>
     public static byte GetIndexOfDigit(int state, int digit)
     {
-		byte index = 0;
-		while ((state % 10) != digit)
-		{
-			state /= 10;
-			++index;
-			if (index == 8)
-				break;
+        byte index = 0;
+        while ((state % 10) != digit)
+        {
+            state /= 10;
+            ++index;
+            if (index == 8)
+                break;
         }
 
         return index;
@@ -111,9 +111,9 @@ public class Utils
     /// <returns>The digit from a specified index.</returns>
     public static int GetDigitAtIndex(int state, int index)
     {
-		double x = Math.Pow(10, index);
-		int q = (int)(state / x);
-		return (q == 0 ? 0 : q % 10);
+        double x = Math.Pow(10, index);
+        int q = (int)(state / x);
+        return (q == 0 ? 0 : q % 10);
     }
 
     /// <summary>
@@ -122,13 +122,13 @@ public class Utils
     /// <returns>A new state with the digit sets at the specified index.</returns>
     public static int SetDigitAtIndex(int state, int index, int digit)
     {
-		double x = Math.Pow(10, index);
-		int q = (int)(state / x);
-		int r = state % (int)x;
-		int a = q / 10;
-		int b = a * 10;
-		int val = ((b + digit) * (int)x) + r;
-		return val;
+        double x = Math.Pow(10, index);
+        int q = (int)(state / x);
+        int r = state % (int)x;
+        int a = q / 10;
+        int b = a * 10;
+        int val = ((b + digit) * (int)x) + r;
+        return val;
     }
 
     /// <summary>
@@ -137,10 +137,10 @@ public class Utils
     /// <returns>A new state with 2 digits being exchanged.</returns>
     public static int SwapDigit(int state, int index1, int index2)
     {
-		int digit1 = GetDigitAtIndex(state, index1);
-		int digit2 = GetDigitAtIndex(state, index2);
-		int tmpstate = SetDigitAtIndex(state, index1, digit2);
-		return SetDigitAtIndex(tmpstate, index2, digit1);
+        int digit1 = GetDigitAtIndex(state, index1);
+        int digit2 = GetDigitAtIndex(state, index2);
+        int tmpstate = SetDigitAtIndex(state, index1, digit2);
+        return SetDigitAtIndex(tmpstate, index2, digit1);
     }
 
     /// <summary>
@@ -149,19 +149,19 @@ public class Utils
     /// <returns>A new state with a new blank position.</returns>
     public static int MoveBlank(int state, int blankindex, Direction direction)
     {
-		switch (direction)
-		{
-			case Direction.Up:
-				return SwapDigit(state, blankindex, blankindex - 3);
+        switch (direction)
+        {
+            case Direction.Up:
+                return SwapDigit(state, blankindex, blankindex - 3);
 
-			case Direction.Down:
-				return SwapDigit(state, blankindex, blankindex + 3);
+            case Direction.Down:
+                return SwapDigit(state, blankindex, blankindex + 3);
 
-			case Direction.Left:
-				return SwapDigit(state, blankindex, blankindex - 1);
+            case Direction.Left:
+                return SwapDigit(state, blankindex, blankindex - 1);
 
-			default:
-				return SwapDigit(state, blankindex, blankindex + 1);
+            default:
+                return SwapDigit(state, blankindex, blankindex + 1);
 		}
     }
 
@@ -172,71 +172,71 @@ public class Utils
     /// <returns>An array of possible next states.</returns>
     public static int[] ResolveNextStates(int state)
     {
-		byte blankindex = GetBlankIndex(state);
-		int[] states;
+        byte blankindex = GetBlankIndex(state);
+        int[] states;
 
-		switch (blankindex)
-		{
-			case 1:
-				states = new int[3];
-				states[0] = MoveBlank(state, blankindex, Direction.Left);
-				states[1] = MoveBlank(state, blankindex, Direction.Right);
-				states[2] = MoveBlank(state, blankindex, Direction.Down);
-				return states;
+        switch (blankindex)
+        {
+            case 1:
+                states = new int[3];
+                states[0] = MoveBlank(state, blankindex, Direction.Left);
+                states[1] = MoveBlank(state, blankindex, Direction.Right);
+                states[2] = MoveBlank(state, blankindex, Direction.Down);
+                return states;
 
-			case 2:
-				states = new int[2];
-				states[0] = MoveBlank(state, blankindex, Direction.Left);
-				states[1] = MoveBlank(state, blankindex, Direction.Down);
-				return states;
+            case 2:
+                states = new int[2];
+                states[0] = MoveBlank(state, blankindex, Direction.Left);
+                states[1] = MoveBlank(state, blankindex, Direction.Down);
+                return states;
 
-			case 3:
-				states = new int[3];
-				states[0] = MoveBlank(state, blankindex, Direction.Up);
-				states[1] = MoveBlank(state, blankindex, Direction.Down);
-				states[2] = MoveBlank(state, blankindex, Direction.Right);
-				return states;
+            case 3:
+	            states = new int[3];
+	            states[0] = MoveBlank(state, blankindex, Direction.Up);
+	            states[1] = MoveBlank(state, blankindex, Direction.Down);
+	            states[2] = MoveBlank(state, blankindex, Direction.Right);
+	            return states;
 
-			case 4:
-				states = new int[4];
-				states[0] = MoveBlank(state, blankindex, Direction.Up);
-				states[1] = MoveBlank(state, blankindex, Direction.Left);
-				states[2] = MoveBlank(state, blankindex, Direction.Right);
-				states[3] = MoveBlank(state, blankindex, Direction.Down);
-				return states;
+            case 4:
+	            states = new int[4];
+	            states[0] = MoveBlank(state, blankindex, Direction.Up);
+	            states[1] = MoveBlank(state, blankindex, Direction.Left);
+	            states[2] = MoveBlank(state, blankindex, Direction.Right);
+	            states[3] = MoveBlank(state, blankindex, Direction.Down);
+	            return states;
 
-			case 5:
-				states = new int[3];
-				states[0] = MoveBlank(state, blankindex, Direction.Up);
-				states[1] = MoveBlank(state, blankindex, Direction.Down);
-				states[2] = MoveBlank(state, blankindex, Direction.Left);
-				return states;
+            case 5:
+	            states = new int[3];
+	            states[0] = MoveBlank(state, blankindex, Direction.Up);
+	            states[1] = MoveBlank(state, blankindex, Direction.Down);
+	            states[2] = MoveBlank(state, blankindex, Direction.Left);
+	            return states;
 
-			case 6:
-				states = new int[2];
-				states[0] = MoveBlank(state, blankindex, Direction.Up);
-				states[1] = MoveBlank(state, blankindex, Direction.Right);
-				return states;
+            case 6:
+	            states = new int[2];
+	            states[0] = MoveBlank(state, blankindex, Direction.Up);
+	            states[1] = MoveBlank(state, blankindex, Direction.Right);
+	            return states;
 
-			case 7:
-				states = new int[3];
-				states[0] = MoveBlank(state, blankindex, Direction.Up);
-				states[1] = MoveBlank(state, blankindex, Direction.Left);
-				states[2] = MoveBlank(state, blankindex, Direction.Right);
-				return states;
+            case 7:
+	            states = new int[3];
+	            states[0] = MoveBlank(state, blankindex, Direction.Up);
+	            states[1] = MoveBlank(state, blankindex, Direction.Left);
+	            states[2] = MoveBlank(state, blankindex, Direction.Right);
+	            return states;
 
-			case 8:
-				states = new int[2];
-				states[0] = MoveBlank(state, blankindex, Direction.Up);
-				states[1] = MoveBlank(state, blankindex, Direction.Left);
-				return states;
+            case 8:
+	            states = new int[2];
+	            states[0] = MoveBlank(state, blankindex, Direction.Up);
+	            states[1] = MoveBlank(state, blankindex, Direction.Left);
+	            return states;
 
-			default:
-				states = new int[2];
-				states[0] = MoveBlank(state, blankindex, Direction.Right);
-				states[1] = MoveBlank(state, blankindex, Direction.Down);
-				return states;
-		}
+            default:
+	            states = new int[2];
+	            states[0] = MoveBlank(state, blankindex, Direction.Right);
+	            states[1] = MoveBlank(state, blankindex, Direction.Down);
+	            return states;
+        }
     }
 
     /// <summary>
@@ -247,25 +247,25 @@ public class Utils
     /// <returns>The heuristic value from a given state.</returns>
     public static int GetHeuristicValue(int state)
     {
-		int hval = 0;
+        int hval = 0;
 
-		for (byte i = 0; i < 9; i++)
-		{
-			int digit = GetDigitAtIndex(state, i);
-			if (digit == 0)
-				continue;
+        for (byte i = 0; i < 9; i++)
+        {
+	        int digit = GetDigitAtIndex(state, i);
+	        if (digit == 0)
+		        continue;
 
-			int row1 = i / 3;
-			int column1 = i % 3;
-			int row2 = goalstatemap[digit, 0];
-			int column2 = goalstatemap[digit, 1];
+	        int row1 = i / 3;
+	        int column1 = i % 3;
+	        int row2 = goalstatemap[digit, 0];
+	        int column2 = goalstatemap[digit, 1];
 
-			int rowoffset = Math.Abs(row1 - row2);
-			int columnoffset = Math.Abs(column1 - column2);
-			hval += rowoffset + columnoffset;
-		}
+	        int rowoffset = Math.Abs(row1 - row2);
+	        int columnoffset = Math.Abs(column1 - column2);
+	        hval += rowoffset + columnoffset;
+        }
 
-		return hval;
+        return hval;
     }
 
     /// <summary>
@@ -279,21 +279,21 @@ public class Utils
     /// <returns>The string representation from a given state.</returns>
     public static string GetStateString(int state)
     {
-		StringBuilder sb = new StringBuilder();
-		char[] c = new char[9];
+        StringBuilder sb = new StringBuilder();
+        char[] c = new char[9];
 
-		for (byte i = 0; i < c.Length; i++)
-		{
-			int x = GetDigitAtIndex(state, i);
-			char tmp = (x == 0 ? ' ' : char.Parse(x.ToString()));
-			c[i] = tmp;
-		}
+        for (byte i = 0; i < c.Length; i++)
+        {
+	        int x = GetDigitAtIndex(state, i);
+	        char tmp = (x == 0 ? ' ' : char.Parse(x.ToString()));
+	        c[i] = tmp;
+        }
 
-		sb.AppendFormat("{0}{1}{2}" + Environment.NewLine, c[0], c[1], c[2]);
-		sb.AppendFormat("{0}{1}{2}" + Environment.NewLine, c[3], c[4], c[5]);
-		sb.AppendFormat("{0}{1}{2}" + Environment.NewLine, c[6], c[7], c[8]);
+        sb.AppendFormat("{0}{1}{2}" + Environment.NewLine, c[0], c[1], c[2]);
+        sb.AppendFormat("{0}{1}{2}" + Environment.NewLine, c[3], c[4], c[5]);
+        sb.AppendFormat("{0}{1}{2}" + Environment.NewLine, c[6], c[7], c[8]);
 
-		return sb.ToString();
+        return sb.ToString();
     }
 
     /// <summary>
@@ -301,10 +301,10 @@ public class Utils
     /// </summary>
     public static void ShowPuzzle()
     {
-		Console.WriteLine("Puzzle initial state =");
-		Console.WriteLine(GetStateString(initstate));
-		Console.WriteLine("Puzzle goal state =");
-		Console.WriteLine(GetStateString(goalstate));
+        Console.WriteLine("Puzzle initial state =");
+        Console.WriteLine(GetStateString(initstate));
+        Console.WriteLine("Puzzle goal state =");
+        Console.WriteLine(GetStateString(goalstate));
     }
 
     /// <summary>
@@ -312,7 +312,7 @@ public class Utils
     /// </summary>
     public static void ShowNoSolutionMessage()
     {
-		Console.WriteLine("There is no solution exist.\n");
+        Console.WriteLine("There is no solution exist.\n");
     }
 
     /// <summary>
@@ -321,37 +321,37 @@ public class Utils
     /// </summary>
     public static void SetPuzzle()
     {
-		try
-		{
-			string dir = Directory.GetCurrentDirectory();
-			string file = Path.Combine(dir, "config.xml");
-			if (!File.Exists(file))
-				return;
+        try
+        {
+	        string dir = Directory.GetCurrentDirectory();
+	        string file = Path.Combine(dir, "config.xml");
+	        if (!File.Exists(file))
+		        return;
 
-			XmlDocument doc = new XmlDocument();
-			doc.Load(file);
-			XmlNode initnode = doc.SelectSingleNode("/config/init_state");
-			XmlNode goalnode = doc.SelectSingleNode("/config/goal_state");
-			XmlNode depthnode = doc.SelectSingleNode("/config/depth_limit");
+	        XmlDocument doc = new XmlDocument();
+	        doc.Load(file);
+	        XmlNode initnode = doc.SelectSingleNode("/config/init_state");
+	        XmlNode goalnode = doc.SelectSingleNode("/config/goal_state");
+	        XmlNode depthnode = doc.SelectSingleNode("/config/depth_limit");
 
-			string init = ReverseString(initnode.InnerText);
-			string goal = ReverseString(goalnode.InnerText);
-			string depth = depthnode.InnerText;
+	        string init = ReverseString(initnode.InnerText);
+	        string goal = ReverseString(goalnode.InnerText);
+	        string depth = depthnode.InnerText;
 
-			int _initstate = int.Parse(init);
-			int _goalstate = int.Parse(goal);
-			int _depthlimit = int.Parse(depth);
+	        int _initstate = int.Parse(init);
+	        int _goalstate = int.Parse(goal);
+	        int _depthlimit = int.Parse(depth);
 
-			initstate = _initstate;
-			goalstate = _goalstate;
-			depthlimit = _depthlimit;
-		}
+	        initstate = _initstate;
+	        goalstate = _goalstate;
+	        depthlimit = _depthlimit;
+        }
 
-		catch
-		{
-		}
+        catch
+        {
+        }
 
-		SetGoalStateMap();
+        SetGoalStateMap();
     }
 
     /// <summary>
@@ -360,12 +360,12 @@ public class Utils
     /// </summary>
     private static void SetGoalStateMap()
     {
-		for (byte i = 0; i < 9; i++)
-		{
-			int digit = GetDigitAtIndex(goalstate, i);
-			goalstatemap[digit, 0] = (byte)(i / 3);
-			goalstatemap[digit, 1] = (byte)(i % 3);
-		}
+        for (byte i = 0; i < 9; i++)
+        {
+	        int digit = GetDigitAtIndex(goalstate, i);
+	        goalstatemap[digit, 0] = (byte)(i / 3);
+	        goalstatemap[digit, 1] = (byte)(i % 3);
+        }
     }
 
     /// <summary>
@@ -374,8 +374,8 @@ public class Utils
     /// <returns>A new string with the original string being reversed.</returns>
     private static string ReverseString(string s)
     {
-		char[] c = s.ToCharArray();
-		Array.Reverse(c);
-		return new string(c);
+        char[] c = s.ToCharArray();
+        Array.Reverse(c);
+        return new string(c);
     }
 }
